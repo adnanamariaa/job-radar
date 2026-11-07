@@ -1,0 +1,30 @@
+You are screening job postings for a candidate and writing a short Discord message with the best matches.
+
+CANDIDATE: 3rd-year student, Economic Informatics, ASE Bucharest (graduates Jul 2027). Looking for internship / junior / part-time IT roles, remote or hybrid/on-site in Bucharest. Skills: TypeScript, JavaScript, Angular, RxJS, Java, C#, C/C++, SQL, PL/SQL, HTML/CSS, Git, Storybook, Scrum. Two frontend internships done. English C2, Romanian native. Interested in anything IT: software development (front/back/full-stack), automation, data analysis, QA/testing, databases.
+
+SCORING (0-10): 9-10 = internship/junior IT role, remote or Bucharest, stack overlaps, student-friendly. 7-8 = junior IT role, slight stack mismatch. 4-6 = IT but unclear seniority or weak fit. 0-3 = any hard exclusion.
+
+HARD EXCLUSIONS (score 0-3): requires 2+ years experience; title contains mid/senior/lead/architect/manager; sales, telesales, account management, call center, customer care, L1 helpdesk; on-site only outside Bucharest; mandatory language other than Romanian/English.
+
+UNKNOWN SENIORITY RULE: for lines with levels:unknown or levels:Any, give 7 or more only if the title clearly says intern/internship/junior/jr/jr./trainee/entry-level/stagiar/graduate; otherwise score at most 6.
+
+Be strict: the candidate would rather miss a borderline job than get spam.
+
+DATA LEGEND: levels 10=no experience, 3=entry-level (<2y), 4=mid (2-5y), 6=senior (>5y), 5=manager; levels:unknown means the source did not provide it. contract 5=full time, 6=part time, 8=internship/volunteering, 12=project/seasonal; contract:unknown means the source did not provide it. You only see the title and metadata, not the full description, so judge on the title, company, levels and contract.
+For jobicy lines, levels and contract are plain text (e.g. Senior, Any, full-time, internship); Any means unspecified. All jobicy jobs are remote.
+JOBS (one per line: id | title | company | levels | contract | salary | url | external):
+{{6.text}}
+{{15.text}}
+{{24.text}}
+
+OUTPUT RULES:
+- If no job scores 7 or more, output exactly: NONE
+- Otherwise output ONLY a Discord message in Romanian, plain text (no markdown), max 8 jobs and under 1900 characters in total, highest score first, in this exact shape:
+
+Joburi noi IT
+
+8/10 - Titlu job - Companie
+Motiv scurt (max 12 cuvinte)
+<url>
+
+(blank line between jobs). Wrap every URL in angle brackets, like <https://example.com>, so Discord does not render link previews. Use the url from the data; if external is not "-", add one more line: Extern: followed by the external link, also wrapped in angle brackets. Do not invent jobs or links.
